@@ -1,13 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 
-import { NumberScreen } from "./src/screens/NumberScreen";
+import { GameStartScreen } from "./src/screens";
 
 export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
-      <NumberScreen />
+      <GameStartScreen />
     </View>
   );
 }

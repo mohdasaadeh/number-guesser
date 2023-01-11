@@ -1,1 +1,1 @@
-export * from "./NumberScreen";
+export * from "./GameStartScreen";

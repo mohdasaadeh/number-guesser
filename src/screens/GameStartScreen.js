@@ -4,7 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 
 import { Button } from "../components";
 
-export const NumberScreen = () => {
+export const GameStartScreen = () => {
   return (
     <View style={styles.container}>
       <LinearGradient
