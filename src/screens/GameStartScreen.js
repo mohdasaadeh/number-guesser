@@ -1,29 +1,44 @@
 import React from "react";
-import { View, StyleSheet, ImageBackground, TextInput } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import { View, StyleSheet, TextInput, Alert } from "react-native";
 
 import { Button } from "../components";
+import { colors } from "../constants";
 
-export const GameStartScreen = () => {
+export const GameStartScreen = ({
+  setScreen,
+  number,
+  setNumber,
+  onGameStart,
+}) => {
+  const onConfirm = () => {
+    const numberValue = Number(number);
+
+    if (!numberValue || numberValue <= 0 || numberValue >= 100) {
+      Alert.alert("Invalid Number", "The number must be between 0 and 100", [
+        { text: "OK" },
+      ]);
+    } else {
+      setScreen("Game");
+
+      onGameStart();
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <LinearGradient
-        colors={["#6a040f", "#faa307"]}
-        style={styles.background}
-      />
-      <ImageBackground
-        source={require("../../assets/dice.jpg")}
-        resizeMode="cover"
-        style={styles.imageBackground}
-      />
       <View style={styles.inputBox}>
-        <TextInput style={styles.input} keyboardType="numeric" />
+        <TextInput
+          style={styles.input}
+          keyboardType="numeric"
+          value={number}
+          onChangeText={(value) => setNumber(value)}
+        />
         <View style={styles.buttonsBox}>
           <View style={styles.buttonBox} marginRight={20}>
-            <Button title="Reset" />
+            <Button title="Reset" onPress={() => setNumber("")} />
           </View>
           <View style={styles.buttonBox}>
-            <Button title="Confirm" />
+            <Button title="Confirm" onPress={onConfirm} />
           </View>
         </View>
       </View>
@@ -37,21 +52,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  background: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    height: "100%",
-  },
-  imageBackground: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    height: "100%",
-    opacity: 0.2,
-  },
   inputBox: {
     width: "80%",
     display: "flex",
@@ -59,15 +59,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: 50,
     paddingHorizontal: 10,
-    backgroundColor: "#370617",
+    backgroundColor: colors.primaryDark,
     borderRadius: 8,
   },
   input: {
     width: 70,
     height: 30,
     borderBottomWidth: 2,
-    borderBottomColor: "#ffba08",
-    fontSize: 20,
+    borderBottomColor: colors.secondaryLight,
+    fontSize: 30,
+    color: "white",
     textAlign: "center",
   },
   buttonsBox: {
@@ -78,6 +79,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonBox: {
-    width: 110,
+    width: 130,
   },
 });

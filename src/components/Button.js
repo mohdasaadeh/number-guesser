@@ -1,11 +1,15 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Pressable } from "react-native";
 
-export const Button = ({ title }) => {
+import { colors } from "../constants";
+
+export const Button = ({ title, onPress }) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>{title}</Text>
-    </View>
+    <Pressable onPress={onPress}>
+      <View style={styles.container}>
+        <Text style={styles.text}>{title}</Text>
+      </View>
+    </Pressable>
   );
 };
 
@@ -13,7 +17,7 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     paddingVertical: 10,
-    backgroundColor: "#9d0208",
+    backgroundColor: colors.primaryMedium,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
